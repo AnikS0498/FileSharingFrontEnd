@@ -8,7 +8,7 @@
  const downloadContainerLink = document.querySelector(".download-link-container");
  const downloadLinkGenerator = document.querySelector("#downloadLink");
  const uploadMessage = document.querySelector(".uploadMessage");
- const copyButton = document.querySelector("#copyButton"); 
+ const copyButton = document.querySelector("#copyButton");
  const downloadLinkInput = document.querySelector("#downloadLinkInput");
  const toast = document.querySelector("#toast");
  const downloadButton = document.querySelector("#downloadButton");
@@ -20,13 +20,15 @@
 
  uploadArea.addEventListener("dragover", (event)=>{
     event.preventDefault();
+    // console.log("Dragging Over");
     if(!uploadArea.classList.contains("upload-area-item-dropped"))
     {
         uploadArea.classList.add("upload-area-item-dropped");
     }
 });
- 
+
  uploadArea.addEventListener("dragleave", ()=>{
+   // console.log("Drag Leave");
     uploadArea.classList.remove("upload-area-item-dropped");
  });
 
@@ -54,7 +56,7 @@
  })
 
  const uploadFile = ()=>{
-     
+
      const file = fileInput.files[0];
      if(file.size > maxAllowedSize){
          fileInput.value="";
@@ -97,7 +99,7 @@
     uploadMessage.style.display = "inline";
     downloadContainerLink.style.display = "inline";
     downloadLinkGenerator.href = downloadLink;
-    
+
  }
 
  copyButton.addEventListener("click", ()=>{
@@ -105,7 +107,7 @@
  });
 
  const copyText = (downloadableLink) =>{
-    
+
     let link = downloadableLink.href;
     console.log(link);
     let inputElement = document.createElement("input");
@@ -114,16 +116,16 @@
     inputElement.select();
     document.execCommand("copy");
     showToast("Download link copied");
-    
+
     inputElement.parentNode.removeChild(inputElement);
-    
+
  }
 
 
  const showToast = (msg)=>{
    toast.innerHTML = msg;
    toast.style.transform = "translateY(0)";
-   
+
    const toastTimer = setTimeout(()=>{
       toast.style.transform = "translateX(400%)";
    }, 2000);
