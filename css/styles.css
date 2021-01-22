@@ -9,6 +9,7 @@ body, html{
 }
 
 .flex-container{
+  position: relative;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -26,7 +27,7 @@ body, html{
 }
 
 .card{
-    padding: 35px 50px ;
+    padding: 50px ;
     background-color: white;
     border-radius: 20px ;
     box-shadow: 0px 4px 8px 0 rgba(0,0,0,0.2);
@@ -103,21 +104,16 @@ body, html{
     text-align: left;
 }
 
-.download-link-container{
-    position: relative;
-    display: none;
-}
-
 .download-link-container {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    position: absolute;
+    display: none;
+    margin: 10px 0;
     height: 40px;
     width: 100%;
-
+    bottom: 5%;
+    left: 5px;
     font-size: 1rem;
-    padding: 10px 15px;
-
-
+    padding: 15px;
 }
 
 .download-link-container .btn{
