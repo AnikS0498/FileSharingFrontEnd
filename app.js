@@ -10,9 +10,13 @@
  const uploadMessage = document.querySelector(".uploadMessage");
  const copyButton = document.querySelector("#copyButton"); 
  const downloadLinkInput = document.querySelector("#downloadLinkInput");
+ const toast = document.querySelector("#toast");
+ const downloadButton = document.querySelector("#downloadButton");
 
  const host = "https://file-sharing-anikesh.herokuapp.com/";
  const uploadUrl = host + "api/files";
+
+ const maxAllowedSize = 100*1024*1024;
 
  uploadArea.addEventListener("dragover", (event)=>{
     event.preventDefault();
@@ -31,9 +35,12 @@
     const files = event.dataTransfer.files;
     console.log(files);
     event.preventDefault();
-    if(files.length){
+    if(files.length===1){
         fileInput.files = files;
         uploadFile();
+    }else{
+      showToast("Upload 1 file at a time");
+      return;
     }
  });
 
@@ -47,8 +54,14 @@
  })
 
  const uploadFile = ()=>{
-     progressContainer.style.display = "block";
+     
      const file = fileInput.files[0];
+     if(file.size > maxAllowedSize){
+         fileInput.value="";
+         showToast("File size exceeded 100 MB");
+         return;
+     }
+     progressContainer.style.display = "block";
      const formData = new FormData();
      formData.append("myfile", file);
 
@@ -62,6 +75,10 @@
      };
 
      xhr.upload.onprogress = updateProgress;
+     xhr.upload.onerror = ()=>{
+        fileInput.value = "";
+        showTest(`Error in upload: ${xhr.statusText}`);
+     }
 
      xhr.open("POST", uploadUrl);
      xhr.send(formData);
@@ -96,5 +113,29 @@
     document.body.appendChild(inputElement);
     inputElement.select();
     document.execCommand("copy");
+    showToast("Download link copied");
+    
     inputElement.parentNode.removeChild(inputElement);
+    
+ }
+
+
+ const showToast = (msg)=>{
+   toast.innerHTML = msg;
+   toast.style.transform = "translateY(0)";
+   
+   const toastTimer = setTimeout(()=>{
+      toast.style.transform = "translateX(300%)";
+   }, 2000);
+   refresh();
+ }
+
+ downloadButton.addEventListener("click", ()=>{
+    refresh();
+ })
+
+ const refresh = ()=>{
+    setTimeout(()=>{
+       location.reload();
+    }, 4000);
  }
