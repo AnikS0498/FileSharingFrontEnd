@@ -77,7 +77,7 @@
      xhr.upload.onprogress = updateProgress;
      xhr.upload.onerror = ()=>{
         fileInput.value = "";
-        showTest(`Error in upload: ${xhr.statusText}`);
+        showToast(`Error in upload: ${xhr.statusText}`);
      }
 
      xhr.open("POST", uploadUrl);
