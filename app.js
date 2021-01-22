@@ -124,11 +124,11 @@
 
  const showToast = (msg)=>{
    toast.innerHTML = msg;
-   toast.style.transform = "translateY(0)";
+   toast.style.transform = "translateY(-500%)";
 
    const toastTimer = setTimeout(()=>{
-      toast.style.transform = "translateX(400%)";
-   }, 2000);
+      toast.style.transform = "translate(500%, -500%)";
+   }, 2500);
    refresh();
  }
 
