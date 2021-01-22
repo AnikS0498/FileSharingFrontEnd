@@ -125,7 +125,7 @@
    toast.style.transform = "translateY(0)";
    
    const toastTimer = setTimeout(()=>{
-      toast.style.transform = "translateX(300%)";
+      toast.style.transform = "translateX(400%)";
    }, 2000);
    refresh();
  }
